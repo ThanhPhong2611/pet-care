@@ -1,0 +1,64 @@
+﻿@model Call
+@inject SignInManager<IdentityUser> signInManager
+@{
+    ViewData["Title"] = "Help Center";
+}
+@section Scripts {
+    <script src="~/lib/signalr/signalr.js"></script>
+    <script src="~/lib/jquery-validate/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+<section class="contact">
+    <h1 class="heading">Help Center</h1>
+    <div class="box-container">
+        <div class="box">
+            <i class="fa-solid fa-headphones"></i>
+            <br>
+            <p class="center">
+                People can Live Chat with our support
+            </p>
+            <a href="#" class="btn">Support</a>
+
+        </div>
+  
+        <div class="box">
+            <i class="fa-solid fa-phone"></i>
+            <!-- Displaying text at
+                the center of the box-->
+            <p class="center">
+                Toll Free Number:+1800 200 300 400
+            </p>
+
+        </div>
+    </div>
+</section>
+
+<section class="form form-request">
+    <p>If you have an issue, please fill out the following form to get help from our support team...</p>
+    <div class="container">
+
+        <form id="theForm" method="post">
+            <div class="form-group form-group-left">
+                <div asp-validation-summary="ModelOnly" />
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" value="@(@User.Identity!.Name)" />
+                <span asp-validation-for="Name" class="text-danger "></span>
+            </div>
+            <div class="form-group form-group-left">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger "></span>
+            </div>
+            <div class="form-group form-group-left">
+                <label asp-for="Problem"></label>
+                <textarea asp-for="Problem" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="Problem" class="text-danger "></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Send" class="btn btn-success" />
+            </div>
+            <div>@ViewBag.Message</div>
+        </form>
+    </div>
+</section>
+

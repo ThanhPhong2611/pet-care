@@ -1,0 +1,100 @@
+﻿@model CatalogTupleModel;
+@*@model Tuple<IEnumerable<SelectListItem>, IEnumerable<Category>>;*@
+@inject SignInManager<IdentityUser> signInManager;
+@{
+	ViewBag.Title = $"Services - {Model.CategoriesOptions.First(o => o.Selected).Text}";
+}
+<section class="service-info">
+    <div class="service-content">
+        <div class="img">
+            <img src="~/images/Pet1.png" alt="">
+        </div>
+        <div class="content">
+            <h3>Pets Are Our Best Friends</h3>
+            <p>They [dogs] never talk about themselves but listen to you while you talk about yourself, and keep up an appearance of being interested in the conversation.</p>
+        </div>
+    </div>
+</section>
+
+<!-- servicies home ends -->
+<!-- services card starts -->
+
+<section class="services">
+    <h1 class="heading">@ViewBag.Title</h1>
+     
+    <div class="btn-group mb-4 btn-dropdown-category">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Select Category
+        </button>
+        <ul class="dropdown-menu dropdown-category">
+            @foreach (var item in Model.CategoriesOptions)
+            {
+                <li>
+                    <a class="dropdown-item @(item.Selected ? "active" : "")" asp-route-category="@item.Value">@item.Text</a>
+                </li>
+            }
+        </ul>
+    </div>
+
+    <div class="box-container">
+        @foreach (var category in Model.SelectedCategory)
+        {
+            foreach (var animal in category.Animals!)
+            {
+                <div class="box text-center">
+                    <div style="min-height:450px;">
+                    <img src="~/images/animalsImages/@(animal.PicturePath ?? "noimage.jpg")" class="img-fluid mb-3" style="max-height:300px;" alt="@animal.Name" />
+
+                    <h3>@animal.Name</h3>
+                    @* <p>@animal.Description</p> *@
+                    <label class="col-sm-12 col-form-label">
+                        @{
+                            var categoryName = animal.CategoryId switch
+                            {
+                                1 => "Mammal",
+                                2 => "Birds",
+                                3 => "Amphibians",
+                                4 => "Fish",
+                                5 => "Reptiles",
+                                6 => "Invertebrates",
+                                _ => "Unknown"
+                            };
+
+                            var messages = new[]
+                            {
+                $"Best choice for {categoryName}",
+                $"{categoryName} deserve the best care",
+                $"A perfect service for your beloved {categoryName}",
+                $"Top-rated service for {categoryName}s",
+                $"Premium care for any {categoryName}"
+                };
+
+                            var rnd = new Random();
+                            var randomMessage = messages[rnd.Next(messages.Length)];
+                        }
+
+                        @randomMessage
+                    </label>
+                    </div>
+                    <div>
+                        <a asp-action="Animal" asp-route-id="@animal.Id" class="btn btn-outline-primary mb-2">
+                            Details <span class="fas fa-chevron-right"></span>
+                        </a>
+                    </div>
+                 wwwww
+
+                    @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        <div>
+                            <a asp-action="EditAnimal" asp-route-id="@animal.Id" class="btn btn-outline-warning m-1">Edit</a>
+                            <form method="post" asp-action="DeleteAnimal" asp-route-id="@animal.Id" class="d-inline ">
+                                <button type="submit" class="btn btn-outline-danger m-1 btn-delete">Delete</button>
+                            </form>
+                        </div>
+                    }
+                </div>
+            }
+        }
+    </div>
+</section>
+

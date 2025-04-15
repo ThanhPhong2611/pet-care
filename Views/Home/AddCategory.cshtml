@@ -1,0 +1,22 @@
+﻿@model AddCategoryViewModel;
+@{
+    ViewBag.Title = "Add Category";
+}
+<div class="row item-center item-mg-top">
+    <div class="col-md-8">
+        <h1>Add Category</h1>
+        <hr />
+        <form method="post" class="form-request form-login form-add">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" placeholder="Category Name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group row mt-3 item-center">
+            <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+        </form>
+
+    </div>
+</div>

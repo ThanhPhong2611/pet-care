@@ -1,0 +1,127 @@
+﻿.logo {
+    width: 150px;
+}
+.anm-img {
+    max-width: 100%;
+}
+.list-group {
+    max-width: 400px;
+}
+.input-group.mb-3.mx-auto {
+    max-width: 500px;
+}
+
+/*---------------*/
+
+body.active {
+    background: #000000;
+    color: #ffffff;
+}
+
+.container.active li > a.dropdown-item,
+.container.active ul.dropdown-item,
+.container.active .dropdown-item {
+    background: #000000;
+    color: #000000;
+}
+
+        .container.active div.card-group,
+        .container.active div.card-header {
+            border-color: #808080;
+            background: #000000;
+            color: #ffffff;
+        }
+
+        .container.active div {
+            border-color: #808080;
+            background: #000000;
+            color: #ffffff;
+        }
+            .container.active div.card {
+                border-color: #808080;
+                background: #000000;
+                color: #ffffff;
+            }
+
+.container.active > div > div {
+    border-color: #808080;
+    background: #000000;
+    color: #ffffff;
+}
+
+#modeLi {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*background: #ffffff;*/
+    transition: 0.5s;
+}
+
+#toggle {
+    position: relative;
+    display: flex;
+    width: 5em;
+    height: 2.5em;
+    border-radius: 100px;
+    background: #ff6a00;
+}
+
+    #toggle .button-btn {
+        position: absolute;
+        top: 2px;
+        left:3px;
+        bottom:2px;
+        width: 3.7em;
+        height: 2.24em;
+        background: #ffffff;
+        border-radius: 100px;
+        transition: 0.5s;
+        cursor: pointer;
+        box-shadow: -3px 4px 40px red;
+    }
+
+        #toggle .button-btn a {
+            position: relative;
+            justify-content: center;
+            display: flex;
+            font-size: 0.8em;
+            font-weight:900;
+            color:red;
+            font-family: Century;
+            margin-top: 15%;
+        }
+
+            #toggle .button-btn a h6 {
+                font-size: 0.5em;
+                margin-left: 0.05em;
+            }
+
+        #toggle .button-btn span {
+            display: none;
+        }
+
+    #toggle.active .button-btn {
+        left: 1.1em;
+        background: #000000;
+        border-radius: 100px;
+    }
+
+        #toggle.active .button-btn a {
+            display: none;
+        }
+
+        #toggle.active .button-btn span {
+            display: flex;
+            justify-content: center;
+            margin-top: 15%;
+            color: yellow;
+            font-size: 0.8em;
+            font-weight: 400;
+            font-family: Century;
+        }
+
+#toggle.active .button-btn span h6 {
+    margin-left: 0.5em;
+    font-size: 0.5em;
+    font-weight: 500;
+}

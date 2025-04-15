@@ -1,0 +1,78 @@
+﻿@model SearchTupleModel
+@inject SignInManager<IdentityUser> signInManager
+
+@{
+    ViewBag.Title = $"\"{Model.Title}\" - Search result";
+}
+
+
+
+<section class="services">
+    <h1 class="heading">@ViewBag.Title</h1>
+
+    @if (!Model.AnimalsByTitle.Any())
+    {
+        <div class="text-center my-4">
+            <h2 class="lead">There are no results for the requested search</h2>
+        </div>
+    }
+
+    <div class="box-container">
+        @foreach (var animal in Model.AnimalsByTitle)
+        {
+            <div class="box text-center">
+                <div style="min-height:450px;">
+                    <img src="~/images/animalsImages/@(animal.PicturePath ?? "noimage.jpg")" class="img-fluid mb-3" style="max-height:300px;" alt="@animal.Name" />
+
+                    <h3>@animal.Name</h3>
+
+                    <label class="col-sm-12 col-form-label">
+                        @{
+                            var categoryName = animal.CategoryId switch
+                            {
+                                1 => "Mammal",
+                                2 => "Birds",
+                                3 => "Amphibians",
+                                4 => "Fish",
+                                5 => "Reptiles",
+                                6 => "Invertebrates",
+                                _ => "Unknown"
+                            };
+
+                            var messages = new[]
+                            {
+                    $"Best choice for {categoryName}",
+                    $"{categoryName} deserve the best care",
+                    $"A perfect service for your beloved {categoryName}",
+                    $"Top-rated service for {categoryName}s",
+                    $"Premium care for any {categoryName}"
+                    };
+
+                            var rnd = new Random();
+                            var randomMessage = messages[rnd.Next(messages.Length)];
+                        }
+
+                        @randomMessage
+                    </label>
+                </div>
+
+                <div>
+                    <a asp-action="Animal" asp-route-id="@animal.Id" class="btn btn-outline-primary mb-2">
+                        Details <span class="fas fa-chevron-right"></span>
+                    </a>
+                </div>
+
+
+                @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                {
+                    <div>
+                        <a asp-action="EditAnimal" asp-route-id="@animal.Id" class="btn btn-outline-warning m-1">Edit</a>
+                        <form method="post" asp-action="DeleteAnimal" asp-route-id="@animal.Id" class="d-inline ">
+                            <button type="submit" class="btn btn-outline-danger m-1 btn-delete">Delete</button>
+                        </form>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</section>
