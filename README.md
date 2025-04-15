@@ -12,6 +12,8 @@ A web application built with ASP.NET Core MVC that allows users to book at-home 
 - 🔐 Register/Login for users
 - 📦 Book a home service for pets
 - 👤 Manage user roles (Admin)
+- 👤 Manage category (Admin)
+- 👤 Manage booking (Admin)
 - 🔍 Search services, Filter category
 - 📷 Upload service pictures
 - 🎨 Responsive and modern UI
